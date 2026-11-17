@@ -18,16 +18,13 @@ namespace PruebaTecnicaApi.Repository
         }
 
 
-       
-
-
         public async Task<PacienteRequest> ActualizarPacienteAsync(int id ,PacienteRequest paciente)
         {
             using (var con = new SqlConnection(_configuration.GetConnectionString("MyConnectionString")))
             {
                 await con.OpenAsync();
-                string query = "UPDATE Paciente SET TipoDocumento = @TipoDocumento, NumeroDocumento = @NumeroDocumento, Nombre = @Nombre, FechaNacimiento = @FechaNacimiento, " +
-                    "Correo = @Correo, Genero = @Genero, Direccion = @Direccion, NumeroTelefono = @NumeroTelefono, Activo = @Activo WHERE PacienteId = @Id";
+                string query = "UPDATE Paciente SET TipoDocumentoId = @TipoDocumento, NumeroDocumento = @NumeroDocumento, Nombre = @Nombre, FechaNacimiento = @FechaNacimiento, " +
+                    "Correo = @Correo, GeneroId = @Genero, Direccion = @Direccion, NumeroTelefono = @NumeroTelefono, Activo = @Activo WHERE Id = @Id";
 
                 int rowsAffected = await con.ExecuteAsync(query, new { paciente.TipoDocumento, paciente.NumeroDocumento, 
                     paciente.Nombre, paciente.FechaNacimiento, paciente.Correo, paciente.Genero, paciente.Direccion, paciente.NumeroTelefono, paciente.Activo, Id = id });
