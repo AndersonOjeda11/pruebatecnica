@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.log
+TestResults/
+publish/
+
+.env
+secrets.json
+
+
