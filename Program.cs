@@ -20,6 +20,20 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 });
 
+
+
+string corsAngularPoliticy = "_corsAngularPoliticy";
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsAngularPoliticy,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+                      });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +43,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+app.UseCors(corsAngularPoliticy);
 
 app.UseHttpsRedirection();
 
